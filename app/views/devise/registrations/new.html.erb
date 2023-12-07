@@ -4,10 +4,10 @@
     <div class="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
       <%# Logo %>
       <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <%=image_tag("logo_anti_social_network.png", class:"mx-auto h-28 w-auto rounded-md")%>
+        <%= render "devise/shared/logo", class:"mx-auto h-28 w-auto rounded-md" %>
         <h2 class="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign Up</h2>
       </div>
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
         <%# email label and field %>
         <div class="field">
