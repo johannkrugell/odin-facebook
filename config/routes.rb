@@ -8,4 +8,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root 'posts#index'
+
+  # Routes for posts
+  resources :posts
+
+  # Routes for comments
+  resources :comments, only: [:create, :destroy]
+
+  # Routes for likes
+  resources :likes, only: [:create, :destroy]
 end
