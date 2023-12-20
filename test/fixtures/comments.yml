@@ -1,11 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  text: MyText
-  user: one
-  post: one
+example_comment:
+  text: "This is a comment."
+  user: user1
+  post: example_post
 
-two:
-  text: MyText
-  user: two
-  post: two

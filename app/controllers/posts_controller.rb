@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   def index
     if user_signed_in?
       @new_post = Post.new # Initialize a new post for the form
-      @posts = Post.all
+      @posts = Post.all.order(created_at: :desc)
     else
       redirect_to new_user_registration_path
     end

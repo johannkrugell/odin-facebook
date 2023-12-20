@@ -7,4 +7,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :posts
+
+  # Relationships for friend requests
+  # Users who follow this user
+  has_many :follower_relationships, foreign_key: :followed_id, class_name: 'Friendship'
+  has_many :followers, through: :follower_relationships, source: :follower
+
+  # Users this user follows
+  has_many :following_relationships, foreign_key: :follower_id, class_name: 'Friendship'
+  has_many :following, through: :following_relationships, source: :followed
 end

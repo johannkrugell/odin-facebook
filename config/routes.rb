@@ -17,4 +17,12 @@ Rails.application.routes.draw do
 
   # Routes for likes
   resources :likes, only: [:create, :destroy]
+
+  # Routes for friendships
+  resources :friendships, only: [:create, :update, :index] do
+    member do
+      patch :approve
+      delete :decline
+    end
+  end
 end

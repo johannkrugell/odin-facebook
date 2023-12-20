@@ -1,0 +1,27 @@
+<%# Navbar %>
+  <div data-controller="sidebar">
+    <div>
+      <%= render "shared/navbar" %>
+    </div>
+
+  <%# Main content %>
+  <%# Pending followers request %>
+    <div  id="friend-requests" class="hidden" data-sidebar-target="section">
+      <%= render 'friendships/requests' %>
+    </div>  
+
+    <%# User card for suggested friends %>
+     <div  id="suggested-friends" class="hidden" data-sidebar-target="section">
+      <%= render 'friendships/suggestions' %>
+    </div>  
+
+    <%# People who are your friends %>
+    <div  id="confirmed-friends" class="" data-sidebar-target="section">
+      <%= render 'friendships/confirmed' %>
+    </div>  
+
+  <%# Sidebar %>
+    <div  class="hidden mt-20 bg-slate-100 lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+      <%= render "friendships/friends_sidebar" %>
+    </div>
+</div>
