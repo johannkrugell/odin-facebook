@@ -10,13 +10,13 @@ Rails.application.routes.draw do
   root 'posts#index'
 
   # Routes for posts
-  resources :posts
+  resources :posts do 
+    # Routes for likes
+    resources :likes, only: [:create, :destroy]
+  end
 
   # Routes for comments
   resources :comments, only: [:create, :destroy]
-
-  # Routes for likes
-  resources :likes, only: [:create, :destroy]
 
   # Routes for friendships
   resources :friendships, only: [:create, :update, :index] do
