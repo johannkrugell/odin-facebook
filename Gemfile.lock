@@ -227,7 +227,7 @@ GEM
       railties (>= 6.0.0)
     thor (1.3.0)
     timeout (0.4.1)
-    turbo-rails (1.5.0)
+    turbo-rails (2.0.0.pre.beta.2)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
@@ -267,7 +267,7 @@ DEPENDENCIES
   sprockets-rails
   stimulus-rails
   tailwindcss-rails (~> 2.0)
-  turbo-rails
+  turbo-rails (~> 2.0.0.pre.beta)
   tzinfo-data
   web-console
 
