@@ -4,4 +4,6 @@ example_post:
   user: user1
   text: "This is a post."
 
-
+one:
+  user: user1
+  text: "This is an example post."
