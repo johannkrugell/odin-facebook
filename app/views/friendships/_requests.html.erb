@@ -6,6 +6,7 @@
       <% @pending_followers.each do |request| %>
         <div class="container mx-auto mt-14 px-5 justify-center text-center w-2/4">
           <%= request.follower.email %>
+          <%= image_tag gravatar_for(request.follower), alt: request.follower, class: "h-12 w-12 flex-none rounded-full bg-gray-50" %>
           <%= button_to 'Approve', approve_friendship_path(request), :method => :patch, class: 'relative inline-flex items-center rounded-md bg-blue-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600' %>
           <%= button_to 'Decline', decline_friendship_path(request), :method => :delete, class: 'relative inline-flex items-center rounded-md bg-blue-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600' %>
         </div>
@@ -21,6 +22,7 @@
       <% @pending_following.each do |request| %>
         <div class="container mx-auto mt-14 px-5 justify-center text-center w-2/4">
           <%= request.followed.email %>
+          <%= image_tag gravatar_for(request.followed), alt: request.followed, class: "h-12 w-12 flex-none rounded-full bg-gray-50" %>
         </div>
       <% end %>   
     <% end %>

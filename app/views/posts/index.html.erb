@@ -23,7 +23,8 @@
             <div class="grid grid-cols-7 items-center">
               <%# Avatar %>
               <div class="col-start-1 col-end-1 p-3">
-                <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                <%= image_tag gravatar_for(post.user), alt: post.user.email, class: "h-12 w-12 flex-none rounded-full bg-gray-50" %>
+                
               </div>
               <%# Username and time %>
               <div class="col-start-2 col-end-3">
