@@ -72,6 +72,12 @@ group :test do
   gem 'selenium-webdriver'
 end
 
+# Use Tailwind CSS for user interface [https://tailwindcss.com/docs/rails]
 gem 'tailwindcss-rails', '~> 2.0'
 
+# Use devise for user authentication
 gem 'devise', '~> 4.9'
+
+# User mini_magick to resize images
+gem 'mini_magick', '~> 4.11'
+

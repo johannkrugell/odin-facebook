@@ -17,4 +17,11 @@ class User < ApplicationRecord
   # Users this user follows
   has_many :following_relationships, foreign_key: :follower_id, class_name: 'Friendship'
   has_many :following, through: :following_relationships, source: :followed
+
+  # Attachments
+  has_one_attached :profile_picture
+  has_one_attached :banner_image
+
+  # Validations
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
 end

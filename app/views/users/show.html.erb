@@ -3,16 +3,54 @@
   <%= render "shared/navbar" %>
 </div>
 
-<%# New post form %>
-<div class="pt-10">
-  <%= render 'form', new_post: @new_post %>
+<%# Banner  %>
+<div class="grid">
+  <div class="justify-self-center w-2/3 py-24">
+    <div class="relative isolate rounded-md overflow-hidden bg-gray-900 py-24 sm:py-32">
+      <%# Banner image %>
+      <div class="">
+        <% if @user.banner_image.attached? %>
+          <%= image_tag @user.banner_image, class: "absolute inset-0 -z-10 h-full w-full object-cover" %>
+        <% else %>
+          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-y=.8&w=2830&h=1500&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover">
+        <% end %>
+      </div>
+      <%# User avatar %>
+      <div class="mx-auto max-w-2xl lg:mx-0">
+        <%= image_tag gravatar_for(current_user), alt: current_user.email, class: "inline-block h-24 w-24 rounded-full" %>
+      </div>
+    </div>
+  </div>
 </div>
+<%# Update banner image %>
+<%= form_with(model: @user, url: user_path(@user), local: true) do |form| %>
+  <!-- Other user fields -->
 
-<%# Sidebar %>
-<div class="hidden mt-20 bg-slate-100 lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
-  <%= render "shared/sidebar" %>
-</div>
+  <div class="field">
+    <% form.label :profile_picture %>
+    <%= form.file_field :profile_picture %>
+  </div>
 
+  <div class="field">
+    <%= form.label :banner_image %>
+    <%= form.file_field :banner_image %>
+  </div>
+
+  <%= form.submit "Update" %>
+<% end %>
+<%# Update profile %>
+<%= form_with(model: @user, local: true) do |form| %>
+  <!-- Username field -->
+  <div class="field">
+    <%= form.label :username %>
+    <%= form.text_field :username %>
+  </div>
+
+  <!-- Existing fields for profile_picture and banner_image -->
+
+  <%= form.submit "Update" %>
+<% end %>
+<%# Posts %>
 <%# Index of posts %>
 <div class="bg-slate-100">
   <div class= "container mx-auto mt-14 px-5 justify-center w-2/4  ">
@@ -31,7 +69,7 @@
                 <div class="grid grid-rows-1 items-baseline justify-between gap-x-4">
                   <p class="text-sm font-semibold leading-6 text-gray-900"><h3><%= post.user.email %></h3></p>
                   <p class="text-xs text-gray-600">
-                    <time datetime="<%= post.created_at %>"><%= time_ago_in_words(post.created_at) %> ago</time>
+                    <time datetime="2023-03-04T15:54Z">1d ago</time>
                   </p>
                 </div>
               </div>
