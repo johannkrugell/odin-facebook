@@ -7,7 +7,14 @@ class PostsController < ApplicationController
   def index
     if user_signed_in?
       @new_post = Post.new # Initialize a new post for the form
-      @posts = Post.all.order(created_at: :desc)
+      # Get IDs of approved friends
+      friend_ids = current_user.followers.where(friendships: { status: 'approved' }).pluck(:id)
+     
+      # Include the current user's ID in the list
+      user_ids = friend_ids << current_user.id
+
+      # Fetch posts from current user and approved friends
+      @posts = Post.where(user_id: user_ids).order(created_at: :desc)
     else
       redirect_to new_user_registration_path
     end
