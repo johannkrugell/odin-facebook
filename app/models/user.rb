@@ -24,4 +24,7 @@ class User < ApplicationRecord
 
   # Validations
   validates :username, presence: true, uniqueness: { case_sensitive: false }
+
+  # Notifications
+  has_many :notifications 
 end

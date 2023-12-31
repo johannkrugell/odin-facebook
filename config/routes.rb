@@ -29,4 +29,11 @@ Rails.application.routes.draw do
       delete :decline
     end
   end
+
+  # Routes for notifications
+  resources :notifications, only: [:index] do
+    member do
+      post :dismiss
+    end
+  end
 end

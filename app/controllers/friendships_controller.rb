@@ -6,6 +6,7 @@ class FriendshipsController < ApplicationController
     @friendship = current_user.following_relationships.build(followed_id: params[:followed_id], status: 'pending')
     if @friendship.save
       # Redirect or respond as necessary
+      create_notification_for(@friendship)
       redirect_to friendships_path, notice: 'Friend request sent'
     else
       # Handle errors
@@ -61,5 +62,11 @@ class FriendshipsController < ApplicationController
       flash[:alert] = 'Unable to decline friend request.'
       redirect_back(fallback_location: root_path)
     end
+  end
+
+  def create_notification_for(friendship)
+    Notification.create(
+    user_id: friendship.followed_id
+    )
   end
 end
