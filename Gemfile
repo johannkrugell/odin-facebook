@@ -45,7 +45,19 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 gem 'bootsnap', require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
+
+# Use Tailwind CSS for user interface [https://tailwindcss.com/docs/rails]
+gem 'tailwindcss-rails', '~> 2.0'
+
+# Use devise for user authentication
+gem 'devise', '~> 4.9'
+
+# User mini_magick to resize images
+gem 'mini_magick', '~> 4.11'
+
+# Use brakeman for security checks
+gem 'brakeman'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -72,12 +84,6 @@ group :test do
   gem 'selenium-webdriver'
 end
 
-# Use Tailwind CSS for user interface [https://tailwindcss.com/docs/rails]
-gem 'tailwindcss-rails', '~> 2.0'
 
-# Use devise for user authentication
-gem 'devise', '~> 4.9'
 
-# User mini_magick to resize images
-gem 'mini_magick', '~> 4.11'
 

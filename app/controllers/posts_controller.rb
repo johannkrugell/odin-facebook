@@ -3,6 +3,7 @@
 # Controller for posts
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
+  before_action :set_post, only: [:show]
 
   def index
     if user_signed_in?
@@ -27,15 +28,28 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
+      if params[:post][:photo].present?
+        photo = @post.photos.build(user: current_user)
+        photo.image.attach(params[:post][:photo])
+        photo.save
+      end
       redirect_to posts_path, notice: 'Post was successfully created.'
     else
       render :new
     end
   end
 
+  def show
+    @comments = @post.comments.order(created_at: :desc)
+  end
+
   private
 
   def post_params
-    params.require(:post).permit(:text)  # Adjust according to your post attributes
+    params.require(:post).permit(:text) # Permit :photo as a parameter
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
   end
 end

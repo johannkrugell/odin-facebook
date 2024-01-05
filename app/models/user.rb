@@ -8,6 +8,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :posts
   has_many :likes
+  has_many :comments
   
   # Relationships for friend requests
   # Users who follow this user
@@ -22,9 +23,9 @@ class User < ApplicationRecord
   has_one_attached :profile_picture
   has_one_attached :banner_image
 
-  # Validations
-  validates :username, presence: true, uniqueness: { case_sensitive: false }
-
   # Notifications
   has_many :notifications 
+
+  # Validations
+  validates :username, presence: false, uniqueness: { case_sensitive: false }
 end

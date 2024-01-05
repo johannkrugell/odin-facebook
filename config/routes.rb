@@ -14,10 +14,13 @@ Rails.application.routes.draw do
 
   # Routes for posts
   resources :posts do 
-    # Routes for likes
+    # Routes for nested routes for likes and comments
     resources :likes, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
   end
+
+  # Routes for likes
+  resources :likes, only: [:create, :destroy]
 
   # Routes for comments
   resources :comments, only: [:create, :destroy]
@@ -35,5 +38,11 @@ Rails.application.routes.draw do
     member do
       post :dismiss
     end
+  end
+
+  # Routes for photos
+  resources :photos do
+    resources :likes, only: [:create]
+    resources :comments, only: [:create]
   end
 end
