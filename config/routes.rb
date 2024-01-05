@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   # Routes for users
-  resources :users, only: [:show, :update]  
+  resources :users, only: [:show, :update, :destroy]  
 
   # Defines the root path route ("/")
   root 'posts#index'
