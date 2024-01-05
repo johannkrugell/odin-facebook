@@ -3,7 +3,9 @@
 # Controller for posts
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
-  before_action :set_post, only: [:show]
+  before_action :set_post, only: [:show, :destroy]
+  before_action :check_user, only: [:destroy]
+
 
   def index
     if user_signed_in?
@@ -43,6 +45,14 @@ class PostsController < ApplicationController
     @comments = @post.comments.order(created_at: :desc)
   end
 
+  def destroy
+    if @post.destroy
+      redirect_to posts_path, notice: 'Post was successfully deleted.'
+    else
+      redirect_to posts_path, alert: 'Unable to delete the post.'
+    end
+  end
+
   private
 
   def post_params
@@ -51,5 +61,9 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:id])
+  end
+
+  def check_user
+    redirect_to(root_path, alert: 'Unauthorized action.') unless @post.user_id == current_user.id
   end
 end
