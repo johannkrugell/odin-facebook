@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
 
   # Devise routes for users
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
   # Routes for users
   resources :users, only: [:show, :update, :destroy]  
