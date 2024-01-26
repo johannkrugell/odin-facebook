@@ -66,7 +66,7 @@ class FriendshipsController < ApplicationController
 
   def create_notification_for(friendship)
     Notification.create(
-    user_id: friendship.followed_id
+      user_id: friendship.followed_id
     )
   end
 end

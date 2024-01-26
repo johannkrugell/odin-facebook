@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeCommentsToPolymorphic < ActiveRecord::Migration[7.1]
   def change
     remove_reference :comments, :post, index: true, foreign_key: true

@@ -21,7 +21,7 @@ gem 'importmap-rails'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 # gem 'turbo-rails'
-gem "turbo-rails", "~> 2.0.0.pre.beta"
+gem 'turbo-rails', '~> 2.0.0.pre.beta'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem 'stimulus-rails'
@@ -45,7 +45,7 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 gem 'bootsnap', require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.2"
+gem 'image_processing', '~> 1.2'
 
 # Use Tailwind CSS for user interface [https://tailwindcss.com/docs/rails]
 gem 'tailwindcss-rails', '~> 2.0'
@@ -84,7 +84,3 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
 end
-
-
-
-

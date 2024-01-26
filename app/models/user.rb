@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
-  
+
   # Relationships for friend requests
   # Users who follow this user
   has_many :follower_relationships, foreign_key: :followed_id, class_name: 'Friendship', dependent: :destroy

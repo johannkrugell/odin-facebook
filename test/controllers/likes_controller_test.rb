@@ -11,7 +11,7 @@ class LikesControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
   end
 
-  test "should like a post" do
+  test 'should like a post' do
     assert_difference('Like.count', 1) do
       post post_likes_path(@post)
     end
@@ -20,7 +20,7 @@ class LikesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 1, @post.likes_count
   end
 
-  test "should unlike a post" do
+  test 'should unlike a post' do
     # Create a like first
     @post.likes.create(user: @user)
 

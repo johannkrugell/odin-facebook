@@ -8,5 +8,5 @@ class Like < ApplicationRecord
 
   # Validations
   validates :user_id, presence: true
-  validates :likeable_id, presence: true, uniqueness: { scope: [:user_id, :likeable_type] }
+  validates :likeable_id, presence: true, uniqueness: { scope: %i[user_id likeable_type] }
 end

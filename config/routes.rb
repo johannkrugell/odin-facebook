@@ -45,4 +45,8 @@ Rails.application.routes.draw do
     resources :likes, only: [:create]
     resources :comments, only: [:create]
   end
+
+  # Routes for static pages
+  get 'market_place', to: 'pages#market_place'
+  get 'messenger', to: 'pages#messenger'
 end

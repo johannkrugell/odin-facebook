@@ -2,7 +2,7 @@
 
 # Controller for comments.
 class CommentsController < ApplicationController
-  before_action :authenticate_user!  # Assuming you're using Devise for user authentication
+  before_action :authenticate_user! # Assuming you're using Devise for user authentication
 
   def create
     @comment = current_user.comments.new(comment_params)

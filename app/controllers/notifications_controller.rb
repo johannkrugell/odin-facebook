@@ -4,7 +4,7 @@
 class NotificationsController < ApplicationController
   def index
     @notifications = current_user.notifications.where(read: false)
-    
+
     # Respond with Turbo Stream to update the UI
     respond_to do |format|
       format.turbo_stream

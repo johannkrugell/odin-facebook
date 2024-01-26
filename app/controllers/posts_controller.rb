@@ -3,16 +3,15 @@
 # Controller for posts
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
-  before_action :set_post, only: [:show, :destroy]
+  before_action :set_post, only: %i[show destroy]
   before_action :check_user, only: [:destroy]
-
 
   def index
     if user_signed_in?
       @new_post = Post.new # Initialize a new post for the form
       # Get IDs of approved friends
       friend_ids = current_user.followers.where(friendships: { status: 'approved' }).pluck(:id)
-     
+
       # Include the current user's ID in the list
       user_ids = friend_ids << current_user.id
 

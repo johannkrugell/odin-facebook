@@ -18,16 +18,16 @@ Notification.destroy_all
 
 if Rails.env.development?
   # Constants
-  USER_COUNT = 20  # Adjust as needed
-  FRIENDSHIPS_PER_USER = 2  # Adjust as needed
-  POSTS_PER_USER = 2  # Number of posts per user+
+  USER_COUNT = 20 # Adjust as needed
+  FRIENDSHIPS_PER_USER = 2 # Adjust as needed
+  POSTS_PER_USER = 2 # Number of posts per user+
 
   # Creating Users
   USER_COUNT.times do
     User.create!(
       email: Faker::Internet.unique.email,
       username: Faker::Internet.unique.username,
-      password: 'password',  # Use a simple password for seed data
+      password: 'password', # Use a simple password for seed data
       password_confirmation: 'password'
     )
   end
@@ -45,12 +45,12 @@ if Rails.env.development?
   User.find_each do |user|
     POSTS_PER_USER.times do
       user.posts.create!(
-        text: Faker::Hipster.sentence(word_count: 7),  # Adjust the content as needed
+        text: Faker::Hipster.sentence(word_count: 7) # Adjust the content as needed
         # Add other post fields if necessary
       )
     end
   end
-  
-  puts "Seed data created successfully!"
+
+  puts 'Seed data created successfully!'
 
 end

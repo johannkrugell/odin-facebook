@@ -11,13 +11,13 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
   end
 
-  test "should create comment" do
+  test 'should create comment' do
     assert_difference('Comment.count') do
-      post post_comments_path(@post), params: { comment: { text: "This is a test comment." } }
+      post post_comments_path(@post), params: { comment: { text: 'This is a test comment.' } }
     end
 
     assert_redirected_to posts_path
     follow_redirect!
-    assert_match "This is a test comment.", response.body
+    assert_match 'This is a test comment.', response.body
   end
 end

@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class PhotoTest < ActiveSupport::TestCase
+class PagesControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
