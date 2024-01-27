@@ -1,13 +1,13 @@
 <!-- Navbar -->
 <nav data-controller="menu" class="bg-white shadow fixed top-0 w-full mb-5">
   <!-- Container -->
-  <div class="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
+  <div class="mx-auto max-w-9xl px-2 sm:px-4 lg:px-8">
     <!-- Container -->
     <div class="grid grid-cols-5 h-16 justify-between lg:grid-cols-6" data-controller="search">
       <!-- Logo, Search and Navigation -->
-      <div class="col-start-1 col-end-1 grid grid-cols-3 px-2 lg:px-0 lg:col-end-3"  data-search-target="searchParent">
+      <div class="col-start-1 col-end-1 grid grid-cols-3 px-2 lg:grid-cols-4 lg:px-0 lg:col-end-3"  data-search-target="searchParent">
         <!-- Logo -->
-        <div class="self-center col-start-1 col-end-3 lg:col-end-1" data-search-target="searchLogo">
+        <div class="self-center grid justify-items-end col-start-1 col-end-3 lg:col-end-1" data-search-target="searchLogo">
           <%= render "devise/shared/logo_small" %>
         </div>
         <!-- Search box -->
@@ -21,7 +21,7 @@
                 </button>
               </div>
               <input id="search" name="search" class="hidden col-start-1 col-end-6 block w-full rounded-md border-0 
-                bg-white py-1.5 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 
+                bg-gray-100 py-1.5 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 
                 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 
                 sm:text-sm sm:leading-6 lg:flex" placeholder="Search" type="search"
                 data-search-target="searchBox">
@@ -105,14 +105,16 @@
         </button>
       </div>
       <!-- Desktop: Profile, Notifications -->
-      <div class="hidden col-start-6 col-end-6 grid grid-cols-3 self-center lg:flex lg:ml-4 lg:items-center">
+      <div class="hidden col-start-6 col-end-6 grid grid-cols-3 self-center lg:flex 
+                  lg:ml-4 lg:items-center lg:grid lg:grid-cols-4">
         <!-- Notifications icon -->
         <div id="notifications">
           <%= render partial: "notifications/icon", 
-            locals: { notifications: current_user.notifications.where(read: false) } %>
+            locals: { notifications: current_user.notifications.where(read: false) }
+          %>
         </div>
         <!-- User name-->
-        <div class="text-sm"><%= current_user.username %></div>
+        <div class="text-sm text-sky-700 lg:text-base lg:col-start-2 lg:col-end-3"><%= current_user.username %></div>
         <!-- Desktop: Profile dropdown -->
         <div data-controller="menu" class="relative p-2 ">
           <div class="mx-auto h-8 w-auto">

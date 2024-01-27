@@ -49,4 +49,8 @@ Rails.application.routes.draw do
   # Routes for static pages
   get 'market_place', to: 'pages#market_place'
   get 'messenger', to: 'pages#messenger'
+  get 'memories', to: 'pages#memories'
+  get 'bookmarks', to: 'pages#bookmarks'
+  get 'groups', to: 'pages#groups'
+  get 'videos', to: 'pages#videos'
 end
