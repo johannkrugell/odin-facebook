@@ -1,26 +1,58 @@
-<%# Navbar %>
-<div>
-  <%= render "shared/navbar" %>
+<div class="h-screen bg-slate-100" >  
+  <!-- Navbar -->
+  <div class="fixed top-0 z-30 w-full">
+    <%= render "shared/navbar" %>
+  </div>
+
+  <div class="pt-20 grid grid-rows-[25px, 1fr] lg:grid-cols-6 lg:gap-4 lg:pt-3 lg:pt-8 lg:h-full" data-controller="friendship">
+    <!-- Sidebar -->
+    <div  class="hidden lg:block lg:col-span-2 lg:pt-8">
+      <%= render "friendships/friends_sidebar" %>
+    </div>
+
+    <!-- Content Area: Form and Posts -->
+    <div class="lg:col-span-2 px-4 py-4 overflow-auto overflow-y-scroll no-scrollbar">
+
+      <!-- Main content -->
+      <div class="grid grid-rows-[10px, 20px]">
+        
+        <div class="grid grid-cols-6 gap-2 px-2.5 pb-3 ml-3">
+          <!-- Mobile Buttons -->
+          <!-- Your Friends -->
+          <button data-action="click->friendship#toggleSection" data-friendship-target="mobilefriendsButton"
+            class="col-start-1 col-end-3 rounded-full bg-sky-500 px-1.5 py-2 text-xs font-semibold
+                        text-white shadow-sm lg:hover:bg-gray-500 lg:focus-visible:outline 
+                        lg:focus-visible:outline-2 lg:focus-visible:outline-offset-2 
+                        lg:focus-visible:outline-gray-600 lg:hidden">Your Friends</button>
+          <!-- Follower Requests -->
+          <button data-action="click->friendship#toggleSection" data-friendship-target="mobilerequestsButton" 
+                  class="col-start-3 col-end-5 rounded-full bg-gray-300 px-1.5 py-2 text-xs font-semibold
+                        text-gray-800 shadow-sm lg:hover:bg-gray-500 lg:focus-visible:outline 
+                        lg:focus-visible:outline-2 lg:focus-visible:outline-offset-2 
+                        lg:focus-visible:outline-gray-600 lg:hidden">Requests</button>
+          <!-- Suggestions -->
+          <button data-action="click->friendship#toggleSection" data-friendship-target="mobilesuggestionsButton"
+            class="col-start-5 col-end-7 rounded-full bg-gray-300 px-1.5 py-2 text-xs font-semibold
+                        text-gray-800 shadow-sm lg:hover:bg-gray-500 lg:focus-visible:outline 
+                        lg:focus-visible:outline-2 lg:focus-visible:outline-offset-2 
+                        lg:focus-visible:outline-gray-600 lg:hidden">Suggestions</button>
+        </div>
+      </div>
+      
+        <!-- Pending followers request -->
+        <div  id="friend-requests" class="hidden pt-2" data-friendship-target="requestsSection">
+          <%= render 'friendships/requests' %>
+        </div>  
+
+        <!-- People who are your friends -->
+        <div  id="confirmed-friends" class="pt-2" data-friendship-target="friendsSection">
+          <%= render 'friendships/confirmed' %>
+        </div> 
+
+        <!-- User card for suggested friends -->
+        <div  id="suggested-friends" class="hidden pt-2" data-friendship-target="suggestionsSection">
+          <%= render 'friendships/suggestions' %>
+        </div>  
+    </div>       
+  </div>        
 </div>
-
-<%# Sidebar %>
-<div  class="hidden mt-20 bg-slate-100 lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
-  <%= render "friendships/friends_sidebar" %>
-</div>
-
-  <%# Main content %>
-  <%# Pending followers request %>
-    <div  id="friend-requests" class="hidden" data-sidebar-target="section">
-      <%= render 'friendships/requests' %>
-    </div>  
-
-    <%# User card for suggested friends %>
-     <div  id="suggested-friends" class="hidden" data-sidebar-target="section">
-      <%= render 'friendships/suggestions' %>
-    </div>  
-
-    <%# People who are your friends %>
-    <div  id="confirmed-friends" class="" data-sidebar-target="section">
-      <%= render 'friendships/confirmed' %>
-    </div>  
-

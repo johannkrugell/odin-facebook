@@ -8,7 +8,9 @@
       <div class="col-start-1 col-end-1 grid grid-cols-3 px-2 lg:grid-cols-4 lg:px-0 lg:col-end-3"  data-search-target="searchParent">
         <!-- Logo -->
         <div class="self-center grid justify-items-end col-start-1 col-end-3 lg:col-end-1" data-search-target="searchLogo">
-          <%= render "devise/shared/logo_small" %>
+          <a href="/">
+            <%= render "devise/shared/logo_small" %>
+          </a> 
         </div>
         <!-- Search box -->
         <div class="self-center justify-center px-2 lg:justify-end lg:col-start-2 lg:col-end-4" data-search-target="searchField">
@@ -70,8 +72,7 @@
           <!-- Messenger icon -->
           <div class="col-start-1 col-end-1 sm:hidden" >
             <a href="<%= messenger_path %>">
-              <%= render partial: "shared/messenger_icon", locals: { svg_class: "svg-icon" } 
-              %>
+              <%= render partial: "shared/messenger_icon", locals: { svg_class: "svg-icon" } %>
             </a>
           </div>
           <!-- Notifications icon -->
@@ -114,9 +115,9 @@
           %>
         </div>
         <!-- User name-->
-        <div class="text-sm text-sky-700 lg:text-base lg:col-start-2 lg:col-end-3"><%= current_user.username %></div>
+        <div class="text-xs text-sky-700 lg:text-xs lg:col-start-2 lg:col-end-3"><%= current_user.username %></div>
         <!-- Desktop: Profile dropdown -->
-        <div data-controller="menu" class="relative p-2 ">
+        <div data-controller="menu" class="relative p-2">
           <div class="mx-auto h-8 w-auto">
             <button type="button" data-action="click->menu#toggle" 
                     class="relative rounded-full bg-white text-sm 
