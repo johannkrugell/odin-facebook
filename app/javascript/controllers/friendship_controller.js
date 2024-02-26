@@ -51,17 +51,30 @@ export default class extends Controller {
   }
 
   // Method to show friends by default
-  showFriends() {
-    // Highlight the friends button
-    this.friendsButtonTarget.classList.add('bg-sky-500', 'text-white');
-    // Other buttons should not be highlighted
-    this.requestsButtonTarget.classList.remove('bg-sky-500', 'text-white');
-    this.suggestionsButtonTarget.classList.remove('bg-sky-500', 'text-white');
+  // Method to show friends by default
+showFriends() {
+  // Deactivate all buttons
+  ['mobilefriendsButton', 'desktopfriendsButton', 'mobilerequestsButton', 'desktoprequestsButton', 'mobilesuggestionsButton', 'desktopsuggestionsButton'].forEach(type => {
+    this[`${type}Targets`].forEach(button => {
+      button.classList.remove('bg-sky-500', 'text-white');
+      button.classList.add('bg-gray-300', 'text-gray-800');
+    });
+  });
 
-    // Show the friends section
-    this.friendsSectionTarget.classList.remove('hidden');
-    // Hide other sections
-    this.requestsSectionTarget.classList.add('hidden');
-    this.suggestionsSectionTarget.classList.add('hidden');
+  // Activate the friends button if it exists
+  if (this.hasMobilefriendsButtonTarget) {
+    this.mobilefriendsButtonTarget.classList.remove('bg-gray-300', 'text-gray-800');
+    this.mobilefriendsButtonTarget.classList.add('bg-sky-500', 'text-white');
   }
+  if (this.hasDesktopfriendsButtonTarget) {
+    this.desktopfriendsButtonTarget.classList.remove('bg-gray-300', 'text-gray-800');
+    this.desktopfriendsButtonTarget.classList.add('bg-sky-500', 'text-white');
+  }
+
+  // Show the friends section and hide other sections
+  this.friendsSectionTarget.classList.remove('hidden');
+  this.requestsSectionTarget.classList.add('hidden');
+  this.suggestionsSectionTarget.classList.add('hidden');
+  }
+
 }

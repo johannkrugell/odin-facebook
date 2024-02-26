@@ -16,17 +16,9 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      if params[:user][:banner_image].present?
-        processed_image_file = process_image(params[:user][:banner_image])
-
-        # Create an attachable object
-        attachable = {
-          io: File.open(processed_image_file.path),
-          filename: 'banner_image.png',
-          content_type: 'image/png'
-        }
-        @user.banner_image.attach(attachable)
-      end
+      process_and_attach_image(params[:user][:profile_picture], 'profile_picture', '300x300>') if params[:user][:profile_picture].present?
+      process_and_attach_image(params[:user][:banner_image], 'banner_image', '1200x300>') if params[:user][:banner_image].present?
+  
       redirect_to @user, notice: 'Profile was successfully updated.'
     else
       render :show
@@ -50,7 +42,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:profile_picture, :banner_image, :username)
+    params.require(:user).permit(:email, :username, :profile_picture, :banner_image)
   end
 
   # Ensures that users can only update their own profiles
@@ -60,14 +52,24 @@ class UsersController < ApplicationController
   end
 
   # Processes the uploaded image to a standard size
-  def process_image(uploaded_image)
+  def process_and_attach_image(uploaded_image, image_type, dimensions)
     image = MiniMagick::Image.new(uploaded_image.path)
-    image.resize '800x600'
-    image.crop '800x600+0+0'
-
+    image.resize dimensions # This resizes while maintaining aspect ratio
+  
     # Save the processed image to a temporary file
-    temp_file = Tempfile.new(['processed_image', '.png'])
+    temp_file = Tempfile.new(["#{image_type}", File.extname(uploaded_image.original_filename)])
     image.write(temp_file.path)
-    temp_file
+  
+    # Create an attachable object
+    attachable = {
+      io: File.open(temp_file.path),
+      filename: uploaded_image.original_filename,
+      content_type: uploaded_image.content_type
+    }
+  
+    @user.send("#{image_type}").attach(attachable)
+  
+    # Ensure the temporary file is deleted after processing
+    temp_file.unlink
   end
 end

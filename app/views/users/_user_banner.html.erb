@@ -1,0 +1,18 @@
+<!-- Banner image -->
+<div class="relative h-32 bg-cover bg-center lg:w-full lg:h-56">
+  <% if @user.banner_image.attached? %>
+    <%= image_tag @user.banner_image, class: "mt-2 container object-cover lg:object-cover lg:rounded-lg h-56" %>
+    <div class="absolute bottom-1.5 right-1.5 bg-gray-200 p-1 rounded-full border-2 border-white lg:-bottom-4 lg:right-4"
+      data-action="click->user#triggerBannerInput">
+      <!-- Camera icon -->
+      <%= render partial: 'shared/camera_icon' %>
+    </div>
+  <% else %>
+    <%= render partial: 'devise/shared/logo_profile_page',  locals: { svg_class: "svg-icon" }  %>
+    <div class="absolute bottom-1.5 right-1.5 bg-gray-200 p-1 rounded-full border-2 border-white lg:-bottom-5"
+      data-action="click->user#triggerBannerInput">
+      <!-- Camera icon -->
+      <%= render partial: 'shared/camera_icon' %>
+    </div>
+  <% end %>
+</div>

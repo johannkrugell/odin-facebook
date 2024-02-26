@@ -4,14 +4,15 @@
     <%= render "shared/navbar" %>
   </div>
 
-  <div class="pt-20 grid grid-rows-[25px, 1fr] lg:grid-cols-6 lg:gap-4 lg:pt-3 lg:pt-8 lg:h-full" data-controller="friendship">
+  <div class="pt-20 grid grid-rows-[25px, 1fr] lg:grid-cols-6 lg:gap-4 lg:pt-3 lg:pt-8 lg:h-full" 
+    data-controller="friendship">
     <!-- Sidebar -->
     <div  class="hidden lg:block lg:col-span-2 lg:pt-8">
       <%= render "friendships/friends_sidebar" %>
     </div>
 
     <!-- Content Area: Form and Posts -->
-    <div class="lg:col-span-2 px-4 py-4 overflow-auto overflow-y-scroll no-scrollbar">
+    <div class="lg:col-span-2 px-4 py-4 overflow-auto overflow-y-scroll">
 
       <!-- Main content -->
       <div class="grid grid-rows-[10px, 20px]">

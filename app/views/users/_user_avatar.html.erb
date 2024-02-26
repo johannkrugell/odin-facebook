@@ -1,0 +1,15 @@
+<!-- User avatar -->
+<div class="absolute -bottom-12 left-1/4 transform -translate-x-1/2 lg:-translate-x-2 lg:-left-1/2">
+  <% if current_user.profile_picture.attached? %>
+    <%= image_tag current_user.profile_picture, alt: current_user.username, 
+      class: "rounded-full border-4 border-white h-24 w-24 object-cover lg:h-40 lg:w-40" %>
+  <% else %>
+    <%= image_tag gravatar_for(current_user), alt: current_user.email, 
+      class: "rounded-full border-4 border-white h-24 w-24 object-cover lg:h-40 lg:w-40" %>
+  <% end %>
+  <div class="absolute bottom-0 right-0 bg-gray-200 p-1 rounded-full border-2 border-white"
+    data-action="click->user#triggerProfileInput">
+    <!-- Camera icon -->
+    <%= render partial: 'shared/camera_icon' %>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+ <!-- User name and pen icon -->
+<div class="items-center mt-12 px-4">
+  <div class="grid grid-cols-7 items-center">
+    <!-- Username display and form container -->
+    <div class="col-span-3 flex items-center">
+      <!-- Username display -->
+      <h1 class="text-black font-bold" data-user-target="userNameDisplay">
+        <%= current_user.username %>
+      </h1>
+      <!-- Username form (hidden by default) -->
+      <div class="hidden" data-user-target="userNameForm">
+        <%= form_with(model: @user, url: user_path(@user), local: true) do |form| %>
+          <%= form.text_field :username, class: "text-sm w-36 border-none rounded-md", data: { action: "blur->user#hideUserNameForm" } %>
+        <% end %>
+      </div>
+    </div>
+    <!-- Pen icon -->
+    <div class="col-start-4 col-end-4" data-user-target="penIcon" data-action="click->user#triggerUserInput">
+      <%= render partial: 'shared/pen_icon' %>
+    </div>
+    <!-- Delete account -->
+    <div class = "col-start-5 col-end-8 flex items-center justify-center">
+      <%= button_to 'Delete My Account', user_path(current_user), method: :delete, 
+        data: { confirm: 'Are you sure you want to delete your account? This action cannot be undone.' },
+        class: "col-start-5 col-end-8 items-center justify-center gap-x-1.5 rounded-md bg-red-700 px-3 py-2 text-xs font-semibold 
+        text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 
+        focus-visible:outline-red-600" %>
+    </div> 
+  </div>
+</div>

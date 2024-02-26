@@ -1,0 +1,20 @@
+<!-- Grid list of the users frieds -->
+<div class="container mx-auto mb-2 bg-white rounded-lg shadow-md"> 
+  <div class="grid grid-cols-7 self-center">
+    <h1 class="col-start-1 col-end-3 p-2 text-sm font-bold">Friends</h1>
+    <h2 class="col-start-6 col-end-8 p-2 text-xs text-sky-600 hover:text-sky-800 cursor-pointer">All friends</h2>
+  </div>
+  <ul role="list" class="grid grid-cols-3 p-2 rounded-md gap-x-6 gap-y-8 
+  lg:grid-cols-3 lg:gap-x-4">
+    <% current_user.following.limit(3).each do |friend| %>
+      <li class="relative grid justify-center">
+        <div class="block w-full justify-center rounded-lg bg-gray-100 focus-within:ring-2 
+                    focus-within:ring-indigo-500 focus-within:ring-offset-2 
+                    focus-within:ring-offset-gray-100">
+          <%= image_tag gravatar_for(friend), alt: friend.username, 
+            class: "rounded-full border-2 border-white h-10 w-10 object-cover" %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>

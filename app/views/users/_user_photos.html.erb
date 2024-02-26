@@ -1,0 +1,21 @@
+<!-- Grid list of the users current Photo's -->
+    <div class="container mx-auto mb-2 bg-white rounded-lg shadow-md lg:mt-6"> 
+      <div class="grid grid-cols-7 self-center">
+        <h1 class="col-start-1 col-end-3 p-2 text-sm font-bold">Photos</h1>
+        <h2 class="col-start-6 col-end-8 p-2 text-xs text-sky-600 hover:text-sky-800 cursor-pointer">All photos</h2>
+      </div>
+      <ul role="list" class="grid grid-cols-3 p-2 rounded-lg gap-x-6 gap-y-8 
+                            lg:grid-cols-3 lg:gap-x-2  ">
+        <% current_user.photos.with_attached_image.limit(3).each do |photo| %>
+          <li class="relative grid justify-center self center">
+            <div class="group aspect-h-24 aspect-w-24 block rounded-lg bg-gray-100 
+                        focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 
+                        focus-within:ring-offset-gray-100">
+              <%= image_tag photo.image, alt: photo.image.filename.to_s, class: "pointer-events-none 
+                  object-cover p-1 group-hover:opacity-75 lg:h-32 lg:w-24 rounded-lg" if photo.image.attached? %>
+            </div>
+          </li>
+          
+        <% end %>
+      </ul>
+    </div>

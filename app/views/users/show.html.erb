@@ -1,131 +1,77 @@
-<%# Navbar %>
-<div>
-  <%= render "shared/navbar" %>
-</div>
+ <div class="bg-slate-100"> 
+  <%# Navbar %>
+  <div class="fixed top-0 z-30 w-full">
+    <%= render "shared/navbar" %>
+  </div>
 
-<%# Banner  %>
-<div class="grid">
-  <div class="justify-self-center w-2/3 py-24">
-    <div class="relative isolate rounded-md overflow-hidden bg-gray-900 py-24 sm:py-32">
-      <%# Banner image %>
-      <div class="">
-        <% if @user.banner_image.attached? %>
-          <%= image_tag @user.banner_image, class: "absolute inset-0 -z-10 h-full w-full object-cover" %>
-        <% else %>
-          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-y=.8&w=2830&h=1500&q=80&blend=111827&sat=-100&exp=15&blend-mode=multiply" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover">
-        <% end %>
+  <div class="grid grid-cols-1 lg:grid lg:grid-cols-8 gap-4 pt-3 lg:pt-8">
+    <!-- Desktop Banner -->
+    <div class="hidden lg:block lg:bg-gray-100 lg:w-full lg:col-start-2 lg:col-end-8 lg:mt-10">
+      <%= render "users/user_banner" %>
+    </div>
+    <div class="hidden lg:grid lg:grid-cols-2 lg:block lg:max-h-40 lg:col-start-2 lg:col-end-4 lg:pt-10 lg:gap-y-4">
+      <!-- User Photos -->
+      <div class="hidden lg:block lg:col-span-2 lg:pt-1">
+        <%= render "users/user_photos" %>
       </div>
-      <%# User avatar %>
-      <div class="mx-auto max-w-2xl lg:mx-0">
-        <%= image_tag gravatar_for(current_user), alt: current_user.email, class: "inline-block h-24 w-24 rounded-full" %>
+
+      <!-- User Friends -->
+      <div class="hidden lg:block lg:col-span-2 lg:pt-1">
+        <%= render "users/user_friends" %>
       </div>
     </div>
-  </div>
-</div>
-<%# Update banner image %>
-<%= form_with(model: @user, url: user_path(@user), local: true) do |form| %>
-  <!-- Other user fields -->
-
-  <div class="field">
-    <% form.label :profile_picture %>
-    <%= form.file_field :profile_picture %>
-  </div>
-
-  <div class="field">
-    <%= form.label :banner_image %>
-    <%= form.file_field :banner_image %>
-  </div>
-
-  <%= form.submit "Update" %>
-<% end %>
-<%# Update profile %>
-<%= form_with(model: @user, local: true) do |form| %>
-  <!-- Username field -->
-  <div class="field">
-    <%= form.label :username %>
-    <%= form.text_field :username %>
-  </div>
-
-  <!-- Existing fields for profile_picture and banner_image -->
-
-  <%= form.submit "Update" %>
-<% end %>
-<%# Delete account %>
-  <div>
-    <%= button_to 'Delete My Account', user_path(current_user), method: :delete, data: { confirm: 'Are you sure you want to delete your account? This action cannot be undone.' } %>
-  </div>
-<%# Posts %>
-<%# Index of posts %>
-<div class="bg-slate-100">
-  <div class= "container mx-auto mt-14 px-5 justify-center w-2/4  ">
-    <ul role="list" class="divide-y divide-gray-100 bg-slate-100 rounded shadow-md">
-      <% @posts.each do |post| %> 
-        <li class="flex gap-x-4 py-5 mt-3 bg-white rounded shadow-md">
-          <div class="grid grid-rows-2">
-            <div class="grid grid-cols-7 items-center">
-              <%# Avatar %>
-              <div class="col-start-1 col-end-1 p-3">
-                <%= image_tag gravatar_for(post.user), alt: post.user.email, class: "h-12 w-12 flex-none rounded-full bg-gray-50" %>
-                
-              </div>
-              <%# Username and time %>
-              <div class="col-start-2 col-end-3">
-                <div class="grid grid-rows-1 items-baseline justify-between gap-x-4">
-                  <p class="text-sm font-semibold leading-6 text-gray-900"><h3><%= post.user.email %></h3></p>
-                  <p class="text-xs text-gray-600">
-                    <time datetime="2023-03-04T15:54Z">1d ago</time>
-                  </p>
-                </div>
-              </div>
-              <%# Post text %>
+    
+    <!-- Content -->
+    <div data-controller="user" class="lg:col-start-4 lg:col-end-7 px-4 py-4 ">
+      <div class="grid mt-16 lg:-mt-8 rounded-md">
+        <div class="container mx-auto justify-self-center ">
+          <div class="relative h-56 lg:h-1">
+            <!-- Banner -->
+            <div class="lg:bg-white lg:w-full lg:hidden">
+              <%= render "users/user_banner" %>
             </div>
-            <div class="grid grid-cols-7  ">
-              <p class="col-start-2 col-end-7 block text-left resize-none border-0 bg-transparent py-1.5 text-gray-9 items-start overflow-hidden p-3 rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
-                <%= post.text %>  
-              </p>
-            </div>
-            <div>
-             <!-- Like/Unlike button for the post -->
-              <% if current_user.likes.exists?(likeable: post) %>
-                <% like = current_user.likes.find_by(likeable: post) %>
-                <%= button_to 'Unlike', like_path(like), method: :delete %>
-              <% else %>
-                <%= button_to likes_path(likeable_id: post.id, likeable_type: 'Post'), method: :post  do %>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-6 w-auto rounded-md fill-blue-700" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M313.4 32.9c26 5.2 42.9 30.5 37.7 56.5l-2.3 11.4c-5.3 26.7-15.1 52.1-28.8 75.2h144c26.5 0 48 21.5 48 48 0 18.5-10.5 34.6-25.9 42.6C497 275.4 504 288.9 504 304c0 23.4-16.8 42.9-38.9 47.1 4.4 7.3 6.9 15.8 6.9 24.9 0 21.3-13.9 39.4-33.1 45.6.7 3.3 1.1 6.8 1.1 10.4 0 26.5-21.5 48-48 48h-97.5c-19 0-37.5-5.6-53.3-16.1l-38.5-25.7C176 420.4 160 390.4 160 358.3V247.1c0-29.2 13.3-56.7 36-75l7.4-5.9c26.5-21.2 44.6-51 51.2-84.2l2.3-11.4c5.2-26 30.5-42.9 56.5-37.7zM32 192h64c17.7 0 32 14.3 32 32v224c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V224c0-17.7 14.3-32 32-32z"/></svg>
-                <% end %>
-              <% end %>
-            </div>
-            <div>
-              <%= pluralize(post.likes.count, 'like') %>
-            </div>
-            <div>
-              <!-- Display existing comments for the post -->
-              <div class="comments">
-                <!-- Display the most recent comment for the post -->
-                <% last_comment = post.comments.order(created_at: :desc).first %>
-                <% if last_comment %>
-                  <div class="comment">
-                    <strong><%= last_comment.user.email %>:</strong> <!-- Display the commenter's email or name -->
-                    <p><%= last_comment.text %></p> <!-- Display the comment text -->
-                  </div>
-                <% end %>
-              </div>
-            <div>
-              <!-- Form to add a new comment -->
-              <%= form_with(model: Comment.new, url: post_comments_path(post), local: true) do |form| %>
-                <%= form.hidden_field :post_id, value: post.id %>
-                <div class="field">
-                  <%= form.label :text %>
-                  <%= form.text_area :text %>
-                </div>
-                <div class="actions">
-                  <%= form.submit %>
-                </div>
-              <% end %>
+            <!-- User avatar -->
+            <div class="">
+              <%= render "users/user_avatar" %>
             </div>
           </div>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+          <!-- User name and pen icon -->
+          <div class="lg:-mt-8">
+              <%= render "users/user_update" %>
+          </div>
+      </div>
+      <!-- Form to update banner image and profile picture -->
+      <div class="mt-10 lg:mt-1">
+        <%= form_with(model: @user, url: user_path(@user), local: true) do |form| %>
+          <!-- Other user fields -->
+          <div class="field hidden">
+            <% form.label :profile_picture %>
+            <%= form.file_field :profile_picture, direct_upload: true, data: { action: "change->user#submitForm", user_target: "profilePicture" } %>
+          </div>
+          <div class="field hidden">
+            <%= form.label :banner_image %>
+            <%= form.file_field :banner_image, data: { action: "change->user#submitForm", user_target: "bannerImage" } %>
+          </div>
+          <%= form.submit "Update", class: "hidden", id: "submit_user_form" %>
+        <% end %>
+      </div>
+    
+      <!-- Posts -->
+      <!-- Index of posts -->
+      <div> 
+        <%= render 'posts/posts_index', posts: @user.posts %>
+      </div> 
+
+      <%# Render user photos %>
+      <div class="mb-2 lg:self-center lg:hidden">
+        <%= render 'users/user_photos' %>
+      </div>
+
+      <%# Render user friends %>
+      <div class="mb-3 lg:self-center lg:hidden">
+        <%= render 'users/user_friends' %>
+      </div>
+
+    </div>
+  </div>  
 </div>
