@@ -7,6 +7,8 @@ class FriendshipsController < ApplicationController
     if @friendship.save
       # Redirect or respond as necessary
       create_notification_for(@friendship)
+      Turbo::StreamsChannel.broadcast_refresh_to "friend_request"
+      Turbo::StreamsChannel.broadcast_refresh_to "notification_event"
       redirect_to friendships_path, notice: 'Friend request sent'
     else
       # Handle errors

@@ -29,4 +29,5 @@ class User < ApplicationRecord
 
   # Validations
   validates :username, presence: false, uniqueness: { case_sensitive: false }
+
 end

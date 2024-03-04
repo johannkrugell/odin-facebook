@@ -1,4 +1,0 @@
-<!-- app/views/notifications/dismiss.turbo_stream.erb -->
-<%= turbo_stream.replace "notifications" do %>
-  <%= render partial: "notifications/icon", locals: { notifications: current_user.notifications.where(read: false) } %>
-<% end %>

@@ -9,6 +9,7 @@ class CommentsController < ApplicationController
 
     if @comment.save
       # Handle the successful save (e.g., redirect or render)
+      Turbo::StreamsChannel.broadcast_refresh_to "comment_event"
       redirect_to posts_path
     else
       # Handle the error (e.g., render the form again with error messages)

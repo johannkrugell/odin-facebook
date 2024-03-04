@@ -12,10 +12,11 @@
     
     <%# Turbo 8 %>
     <%= turbo_refreshes_with method: :morph, scroll: :preserve  %>
-    <%= content_for :head %>
+    <%= yield :head %>
+
   </head>
 
-  <body class=" h-full bg-slate-100">
+  <body class="h-full bg-slate-100">
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <main>

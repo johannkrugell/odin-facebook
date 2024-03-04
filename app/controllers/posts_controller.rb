@@ -34,6 +34,7 @@ class PostsController < ApplicationController
         photo.image.attach(params[:post][:photo])
         photo.save
       end
+      Turbo::StreamsChannel.broadcast_refresh_to "post_event"
       redirect_to posts_path, notice: 'Post was successfully created.'
     else
       render :new

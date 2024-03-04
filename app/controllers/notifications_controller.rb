@@ -4,22 +4,16 @@
 class NotificationsController < ApplicationController
   def index
     @notifications = current_user.notifications.where(read: false)
-
-    # Respond with Turbo Stream to update the UI
-    respond_to do |format|
-      format.turbo_stream
-      format.html
-    end
+    Turbo::StreamsChannel.broadcast_refresh_to "notification_event"
   end
 
   def dismiss
     notification = current_user.notifications.find(params[:id])
-    notification.update(read: true)
-
-    # Respond with Turbo Stream to update the UI
-    respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to notifications_path }
+    if notification.update(read: true)
+      Turbo::StreamsChannel.broadcast_refresh_to "notification_event"
+      redirect_to friendships_path, notice: 'Notification dismissed'
+    else
+      redirect_to root_path, alert: 'Unable to dismiss notification.'
     end
   end
 end

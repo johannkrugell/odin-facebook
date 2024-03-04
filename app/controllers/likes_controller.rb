@@ -7,12 +7,14 @@ class LikesController < ApplicationController
   def create
     @like = current_user.likes.new(like_params)
     @like.save
+    Turbo::StreamsChannel.broadcast_refresh_to "like_event"
     redirect_to posts_path  # Adjust the redirect path as needed
   end
 
   def destroy
     @like = current_user.likes.find(params[:id])
     @like&.destroy
+    Turbo::StreamsChannel.broadcast_refresh_to "like_event"
     redirect_to posts_path  # Adjust the redirect path as needed
   end
 
