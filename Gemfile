@@ -59,6 +59,12 @@ gem 'mini_magick', '~> 4.11'
 # Use brakeman for security checks
 gem 'brakeman'
 
+# Use omniauth-github for sign-up and sign-in using github
+gem 'omniauth'
+gem 'omniauth-github' 
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows]
