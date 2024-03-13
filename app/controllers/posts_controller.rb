@@ -30,9 +30,19 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     if @post.save
       if params[:post][:photo].present?
-        photo = @post.photos.build(user: current_user)
-        photo.image.attach(params[:post][:photo])
-        photo.save
+        if params[:post][:photo].present?
+          # Process the uploaded photo and get back a processed file
+          processed_file = ImageProcessor.process_and_attach_image(params[:post][:photo], '800x800')
+          
+          # Build a new photo object and attach the processed image
+          photo = @post.photos.build(user: current_user)
+          photo.image.attach(io: processed_file, filename: params[:post][:photo].original_filename, content_type: 'image/jpeg')
+          photo.save
+    
+          # Ensure the temporary file is deleted after processing
+          processed_file.close
+          processed_file.unlink
+        end
       end
       Turbo::StreamsChannel.broadcast_refresh_to "post_event"
       redirect_to posts_path, notice: 'Post was successfully created.'

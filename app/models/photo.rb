@@ -10,7 +10,4 @@ class Photo < ApplicationRecord
   has_one_attached :image
   has_many :likes, as: :likeable
   has_many :comments, as: :commentable
-
-  # Validations
-  # Add any validations you need for the Photo model
 end
