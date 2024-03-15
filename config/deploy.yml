@@ -22,7 +22,12 @@ registry:
 # Inject ENV variables into containers (secrets come from .env).
 # Remember to run `kamal env push` after making changes!
 env:
+  clear:
+    HOSTNAME: antisocial.com
+    RAILS_SERVE_STATIC_FILES: true
+    RAILS_LOG_TO_STDOUT: true
   secret:
+    - KAMAL_REGISTRY_PASSWORD
     - RAILS_MASTER_KEY
 
 # Use a different ssh user than root
