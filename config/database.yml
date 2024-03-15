@@ -82,6 +82,4 @@ test:
 #
 production:
   <<: *default
-  database: odin_facebook_production
-  username: odin_facebook
-  password: <%= ENV["ODIN_FACEBOOK_DATABASE_PASSWORD"] %>
+  url: <%= Rails.application.credentials.database_url %>
