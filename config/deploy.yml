@@ -6,13 +6,13 @@ image: johannkrugell/antisocial
 
 # Deploy to these servers.
 servers:
-  - 170.64.209.117
+  - 170.64.193.80
   - 170.64.209.117
 
 # Credentials for your image host.
 registry:
   # Specify the registry server, if you're not using Docker Hub
-  server: registry.digitalocean.com
+  # server: registry.digitalocean.com
   username: johannkrugell
 
   # Always use an access token rather than real password when possible.
