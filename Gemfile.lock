@@ -109,6 +109,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dockerfile-rails (1.6.6)
+      rails (>= 3.0.0)
     dotenv (2.8.1)
     drb (2.2.0)
       ruby2_keywords
@@ -338,6 +340,7 @@ DEPENDENCIES
   capybara
   debug
   devise (~> 4.9)
+  dockerfile-rails (>= 1.6)
   faker
   image_processing (~> 1.2)
   importmap-rails

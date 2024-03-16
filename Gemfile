@@ -92,3 +92,5 @@ group :test do
 end
 
 gem "kamal", "~> 1.3"
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
