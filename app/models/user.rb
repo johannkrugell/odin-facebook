@@ -2,6 +2,7 @@
 
 # User model to store user data
 class User < ApplicationRecord
+  before_validation :ensure_username_uniqueness, on: :create
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -54,6 +55,24 @@ class User < ApplicationRecord
   has_many :notifications, dependent: :destroy
 
   # Validations
-  validates :username, presence: false, uniqueness: { case_sensitive: false }
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
 
 end
+
+private
+
+  def ensure_username_uniqueness
+    if self.username.blank?
+      self.username = generate_unique_username(self.email.split('@').first)
+    end
+  end
+
+  def generate_unique_username(base_username)
+    new_username = base_username
+    num = 2
+    while User.exists?(username: new_username)
+      new_username = "#{base_username}_#{num}"
+      num += 1
+    end
+    new_username
+  end
